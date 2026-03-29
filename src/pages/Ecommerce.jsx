@@ -208,12 +208,18 @@ export default function Ecommerce() {
             </div>
 
             <div className="bg-white rounded-xl border border-slate-200 p-5">
-              <h2 className="text-sm font-semibold text-slate-700 mb-4">Order Fulfillment</h2>
+              <div className="flex items-center justify-between mb-1">
+                <h2 className="text-sm font-semibold text-slate-700">Order Status</h2>
+              </div>
+              <div className="flex items-center gap-1.5 mb-4 bg-amber-50 border border-amber-100 rounded-lg px-2.5 py-1.5">
+                <Clock size={11} className="text-amber-500 shrink-0" />
+                <p className="text-xs text-amber-700">ShipStation sync inactive — statuses may not reflect actual fulfillment</p>
+              </div>
               <div className="space-y-3">
                 {[
-                  { label: 'Fulfilled', count: orderStats.fulfillment.FULFILLED, color: 'bg-emerald-500', text: 'text-emerald-700', icon: CheckCircle },
-                  { label: 'Pending', count: orderStats.fulfillment.NOT_FULFILLED, color: 'bg-amber-400', text: 'text-amber-700', icon: Clock },
-                  { label: 'Canceled', count: orderStats.fulfillment.CANCELED || 0, color: 'bg-slate-300', text: 'text-slate-500', icon: XCircle },
+                  { label: 'Confirmed Fulfilled', count: orderStats.fulfillment.FULFILLED, color: 'bg-emerald-500', text: 'text-emerald-700', icon: CheckCircle },
+                  { label: 'No Tracking Data', count: orderStats.fulfillment.NOT_FULFILLED, color: 'bg-slate-300', text: 'text-slate-500', icon: Clock, note: 'ShipStation not reporting back' },
+                  { label: 'Canceled', count: orderStats.fulfillment.CANCELED || 0, color: 'bg-red-300', text: 'text-red-500', icon: XCircle },
                 ].map((s, i) => {
                   const total = orderStats.totalOrders + (orderStats.fulfillment.CANCELED || 0)
                   const pct = Math.round((s.count / total) * 100)
