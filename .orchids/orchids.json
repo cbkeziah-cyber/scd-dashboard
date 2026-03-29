@@ -1,7 +1,7 @@
 {
   "startupCommands": [
-    "npm install; npm run dev",
-    "ngrok http --url=scddashboard.ngrok.app 3000"
+    "npm install; npm run build; npx serve dist --listen 3000 --single",
+    "sleep 5; ngrok http --url=scddashboard.ngrok.app 3000"
   ],
   "projectId": "3b4f62bf-81e1-408c-9587-aa504dbaf4db",
   "templateId": "any"
