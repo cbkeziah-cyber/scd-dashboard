@@ -1,6 +1,6 @@
 {
   "startupCommands": [
-    "npm install; npx vite --host 0.0.0.0 --port 3000",
+    "npm install; rm -rf node_modules/.vite; npx vite --host 0.0.0.0 --port 3000",
     "sleep 5; ngrok http --url=scddashboard.ngrok.app 3000"
   ],
   "projectId": "3b4f62bf-81e1-408c-9587-aa504dbaf4db",
