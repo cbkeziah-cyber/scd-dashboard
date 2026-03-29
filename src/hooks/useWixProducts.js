@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import { fetchAllProducts, fetchCollections, fetchInventory, auditProduct } from '../lib/wixApi'
+import { fetchAllProducts, fetchCollections, fetchInventory, fetchAllOrders, auditProduct, computeOrderStats } from '../lib/wixApi'
 
-// Simple shared cache so all pages share one fetch
-const cache = { products: null, collections: null, inventory: null, promise: null }
+const cache = { products: null, collections: null, inventory: null, orders: null, orderStats: null, promise: null }
 
 async function loadAll() {
   if (cache.promise) return cache.promise
@@ -10,11 +9,14 @@ async function loadAll() {
     fetchAllProducts(),
     fetchCollections(),
     fetchInventory(),
-  ]).then(([products, collections, inventory]) => {
+    fetchAllOrders(),
+  ]).then(([products, collections, inventory, orders]) => {
     cache.products = products
     cache.collections = collections
     cache.inventory = inventory
-    return { products, collections, inventory }
+    cache.orders = orders
+    cache.orderStats = computeOrderStats(orders)
+    return { products, collections, inventory, orders, orderStats: cache.orderStats }
   })
   return cache.promise
 }
@@ -24,6 +26,8 @@ export function useWixData() {
     products: cache.products,
     collections: cache.collections,
     inventory: cache.inventory,
+    orders: cache.orders,
+    orderStats: cache.orderStats,
     loading: !cache.products,
     error: null,
   })
@@ -31,12 +35,8 @@ export function useWixData() {
   useEffect(() => {
     if (cache.products) return
     loadAll()
-      .then(({ products, collections, inventory }) => {
-        setState({ products, collections, inventory, loading: false, error: null })
-      })
-      .catch(err => {
-        setState(s => ({ ...s, loading: false, error: err.message }))
-      })
+      .then(data => setState({ ...data, loading: false, error: null }))
+      .catch(err => setState(s => ({ ...s, loading: false, error: err.message })))
   }, [])
 
   const audits = state.products ? state.products.map(auditProduct) : null

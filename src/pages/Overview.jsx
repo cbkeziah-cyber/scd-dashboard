@@ -1,6 +1,6 @@
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts'
 import {
   Users, MousePointerClick, ShoppingCart, TrendingUp,
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import StatCard from '../components/StatCard'
 import {
-  overviewStats, trafficOverTime, trafficSources, revenueOverTime
+  overviewStats, trafficOverTime, trafficSources
 } from '../data/mockData'
 import { useWixData } from '../hooks/useWixProducts'
 
@@ -20,7 +20,7 @@ const issueIcon = { error: AlertTriangle, warning: AlertTriangle, info: Info }
 const issueBg = { error: 'bg-red-50 border-red-100 text-red-700', warning: 'bg-amber-50 border-amber-100 text-amber-700', info: 'bg-blue-50 border-blue-100 text-blue-600' }
 
 export default function Overview() {
-  const { products, audits, collections, loading } = useWixData()
+  const { products, audits, collections, orderStats, loading } = useWixData()
   const liveIssues = audits ? audits.flatMap(a => a.issues.map(i => ({ ...i, page: a.page, title: a.title }))) : null
   const displayIssues = liveIssues ?? []
   const criticalCount = displayIssues.filter(i => i.type === 'error').length
@@ -68,10 +68,37 @@ export default function Overview() {
         <StatCard label="Organic Sessions" value={overviewStats.organicSessions.value} change={overviewStats.organicSessions.change} icon={Users} color="blue" />
         <StatCard label="Avg. CTR" value={overviewStats.avgCTR.value} change={overviewStats.avgCTR.change} unit="%" icon={MousePointerClick} color="purple" />
         <StatCard label="Avg. Position" value={overviewStats.avgPosition.value} change={overviewStats.avgPosition.change} lowerIsBetter icon={TrendingUp} color="indigo" />
-        <StatCard label="Revenue" value={overviewStats.revenue.value} change={overviewStats.revenue.change} unit="$" icon={ShoppingCart} color="green" />
+        {/* Live revenue from Wix orders */}
+        {orderStats ? (
+          <div className="bg-emerald-50 rounded-xl border border-emerald-100 p-5 hover:shadow-sm transition-shadow">
+            <div className="flex items-start justify-between mb-3">
+              <p className="text-sm text-emerald-600 font-medium">Total Revenue</p>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-emerald-100 text-emerald-600">
+                <ShoppingCart size={16} />
+              </div>
+            </div>
+            <p className="text-2xl font-bold text-emerald-800 mb-1.5">${orderStats.totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+            <p className="text-xs text-emerald-600">{orderStats.totalOrders} paid orders · ${Math.round(orderStats.avgOrderValue)} AOV</p>
+          </div>
+        ) : (
+          <StatCard label="Revenue" value={overviewStats.revenue.value} change={overviewStats.revenue.change} unit="$" icon={ShoppingCart} color="green" />
+        )}
         <StatCard label="Total Sessions" value={overviewStats.totalSessions.value} change={overviewStats.totalSessions.change} icon={Globe} color="teal" />
         <StatCard label="Page Views" value={overviewStats.pageViews.value} change={overviewStats.pageViews.change} icon={Eye} color="orange" />
-        <StatCard label="Conversions" value={overviewStats.conversions.value} change={overviewStats.conversions.change} icon={ShoppingCart} color="pink" />
+        {orderStats ? (
+          <div className="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-sm transition-shadow">
+            <div className="flex items-start justify-between mb-3">
+              <p className="text-sm text-slate-500 font-medium">Total Orders</p>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-blue-50 text-blue-600">
+                <ShoppingCart size={16} />
+              </div>
+            </div>
+            <p className="text-2xl font-bold text-slate-900 mb-1.5">{orderStats.totalOrders}</p>
+            <p className="text-xs text-slate-400">{orderStats.latestMonthLabel}: {orderStats.latestMonthOrders} orders</p>
+          </div>
+        ) : (
+          <StatCard label="Conversions" value={overviewStats.conversions.value} change={overviewStats.conversions.change} icon={ShoppingCart} color="pink" />
+        )}
         <StatCard label="Bounce Rate" value={overviewStats.bounceRate.value} change={overviewStats.bounceRate.change} unit="%" lowerIsBetter icon={TrendingUp} color="red" />
       </div>
 
@@ -129,15 +156,18 @@ export default function Overview() {
 
       {/* Revenue + SEO Issues Row */}
       <div className="grid grid-cols-3 gap-4">
-        {/* Monthly Revenue */}
+        {/* Monthly Revenue — live */}
         <div className="col-span-2 bg-white rounded-xl border border-slate-200 p-5">
-          <h2 className="text-sm font-semibold text-slate-700 mb-4">Monthly Revenue</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-slate-700">Monthly Revenue</h2>
+            {orderStats && <span className="text-xs text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-1"><span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />Live — Wix Orders</span>}
+          </div>
           <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={revenueOverTime} barSize={32}>
+            <BarChart data={orderStats ? orderStats.revenueByMonth.slice(-12) : []} barSize={28}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="label" tick={{ fontSize: 10, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
-              <Tooltip formatter={(v) => `$${v.toLocaleString()}`} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
+              <Tooltip formatter={(v, name) => name === 'Revenue' ? `$${v.toLocaleString('en-US',{minimumFractionDigits:2})}` : v} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
               <Bar dataKey="revenue" name="Revenue" fill="#4361ee" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
