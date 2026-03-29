@@ -6,6 +6,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3000,
-    allowedHosts: ['scddashboard.ngrok.app', '.ngrok.app', '.ngrok-free.app'],
+    allowedHosts: 'all',
   },
 })
