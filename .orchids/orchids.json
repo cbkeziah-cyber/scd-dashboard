@@ -1,7 +1,7 @@
 {
   "startupCommands": [
     "npm install; npm run build; node server.js",
-    "sleep 5; ngrok http --url=scddashboard.ngrok.app 3000"
+    "sleep 5; ngrok config add-authtoken 3BWWoyHe9PaJUk3gUVKj2APhWn7_4WR4Kr29fnJWinKFWN6J9; ngrok http --url=scddashboard.ngrok.app 3000"
   ],
   "projectId": "3b4f62bf-81e1-408c-9587-aa504dbaf4db",
   "templateId": "any"
