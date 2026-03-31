@@ -26,8 +26,13 @@ app.use('/wix-api', async (req, res) => {
       body: req.method !== 'GET' && req.method !== 'HEAD' ? JSON.stringify(req.body) : undefined,
     })
 
-    const data = await response.json()
-    res.status(response.status).json(data)
+    const contentType = response.headers.get('content-type') || ''
+    const body = contentType.includes('application/json') ? await response.json() : await response.text()
+    if (typeof body === 'string') {
+      res.status(response.status).send(body)
+    } else {
+      res.status(response.status).json(body)
+    }
   } catch (err) {
     res.status(500).json({ error: err.message })
   }

@@ -144,7 +144,7 @@ export async function updateProductSEO(productId, { name, description, metaTitle
   if (metaDesc) seoTags.push({ type: 'meta', props: { name: 'description', content: metaDesc } })
 
   const res = await fetch(`${BASE_URL}/stores/v1/products/${productId}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Authorization: API_KEY,
