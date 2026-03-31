@@ -35,7 +35,7 @@ app.use('/wix-api', async (req, res) => {
 
 // Serve static build
 app.use(express.static(join(__dirname, 'dist')))
-app.get('/{*path}', (_, res) => res.sendFile(join(__dirname, 'dist', 'index.html')))
+app.use((_, res) => res.sendFile(join(__dirname, 'dist', 'index.html')))
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`))
