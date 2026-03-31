@@ -131,6 +131,40 @@ export function computeOrderStats(orders) {
   }
 }
 
+// --- Update product SEO fields ---
+export async function updateProductSEO(productId, { name, description, metaTitle, metaDesc }) {
+  // Convert plain text description back to basic HTML
+  const htmlDesc = description
+    ? description.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('')
+    : ''
+
+  // Build SEO tags array
+  const seoTags = []
+  if (metaTitle) seoTags.push({ type: 'title', children: metaTitle })
+  if (metaDesc) seoTags.push({ type: 'meta', props: { name: 'description', content: metaDesc } })
+
+  const res = await fetch(`${BASE_URL}/stores/v1/products/${productId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: API_KEY,
+      'x-wix-site-id': SITE_ID,
+    },
+    body: JSON.stringify({
+      product: {
+        name,
+        description: htmlDesc,
+        ...(seoTags.length > 0 ? { seoData: { tags: seoTags } } : {}),
+      },
+    }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err?.message || `Update failed (${res.status})`)
+  }
+  return res.json()
+}
+
 // --- Helpers ---
 export function stripHtml(html) {
   if (!html) return ''
