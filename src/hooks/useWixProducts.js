@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { fetchAllProducts, fetchCollections, fetchInventory, fetchAllOrders, auditProduct, computeOrderStats } from '../lib/wixApi'
 
 const cache = { products: null, collections: null, inventory: null, orders: null, orderStats: null, promise: null }
@@ -22,6 +22,7 @@ async function loadAll() {
 }
 
 export function useWixData() {
+  const [refreshKey, setRefreshKey] = useState(0)
   const [state, setState] = useState({
     products: cache.products,
     collections: cache.collections,
@@ -33,13 +34,17 @@ export function useWixData() {
   })
 
   useEffect(() => {
+    if (refreshKey > 0) {
+      Object.keys(cache).forEach(k => { cache[k] = null })
+    }
     if (cache.products) return
     loadAll()
       .then(data => setState({ ...data, loading: false, error: null }))
       .catch(err => setState(s => ({ ...s, loading: false, error: err.message })))
-  }, [])
+  }, [refreshKey])
 
+  const refresh = useCallback(() => setRefreshKey(k => k + 1), [])
   const audits = state.products ? state.products.map(auditProduct) : null
 
-  return { ...state, audits }
+  return { ...state, audits, refresh }
 }

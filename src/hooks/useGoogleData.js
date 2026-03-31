@@ -26,6 +26,7 @@ export function useGoogleData() {
   const [loading, setLoading] = useState(false)
   const [ga4Loading, setGA4Loading] = useState(false)
   const [error, setError] = useState(null)
+  const [refreshKey, setRefreshKey] = useState(0)
 
   const isConnected = !!token
   const hasGA4 = !!ga4PropertyId
@@ -40,6 +41,12 @@ export function useGoogleData() {
       },
       (err) => setError(String(err))
     )
+  }, [])
+
+  // Refresh all data
+  const refresh = useCallback(() => {
+    clearCache()
+    setRefreshKey((k) => k + 1)
   }, [])
 
   // Disconnect Google
@@ -93,12 +100,12 @@ export function useGoogleData() {
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
-  }, [token])
+  }, [token, refreshKey])
 
   // Fetch GA4 data when property is selected
   useEffect(() => {
     if (!token || !ga4PropertyId) return
-    if (cache.ga4Stats) {
+    if (cache.ga4Stats && refreshKey === 0) {
       setData((d) => ({
         ...d,
         ga4TrafficOverTime: cache.ga4TrafficOverTime,
@@ -134,13 +141,14 @@ export function useGoogleData() {
       })
       .catch((err) => setError(err.message))
       .finally(() => setGA4Loading(false))
-  }, [token, ga4PropertyId])
+  }, [token, ga4PropertyId, refreshKey])
 
   return {
     isConnected,
     hasGA4,
     connect,
     disconnect,
+    refresh,
     selectGA4Property,
     ga4PropertyId,
     loading,
