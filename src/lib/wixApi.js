@@ -1,7 +1,7 @@
 const CLIENT_ID = '88866539-be75-439d-a18f-874101a91f5a'
 const API_KEY = 'IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcIjg4MmE3NDcwLWViZTAtNGU3OC1hOGUyLWQ0ODA5OGRhNTdhM1wiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcImUzMDJjZmQ3LWRkYzEtNGQyYS1hNDBkLWNjY2JhNWIwOTU4Y1wifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCJmMDQwNWQ1MS01M2EzLTQyN2MtYWQ2NS00MWUwNzJjYjBkOGVcIn19IiwiaWF0IjoxNzc0NzUwMDM5fQ.VRRop9g2Nycf57bezjrh4mJ2ox8WGXkfZo2a2Y2Tp9xWMDqOvqH3YCR4kHKXQ2AV5qJR93dcnRUxuKiFD4sWwBWQ8ahtr-P308Li1Hmlhy3kwZN-mAOviVpphnG9e5JhBHgQlcbjcMHmW0iZSg75eTb-zxdAZZ5mIyphVslrzWwKnZcUCuMkbtHoaG7CPzC5G7u-C9CaIGnhibtPBJPkDkHg96F4kNP45XyBU-6DwgHwWifQsW-B03d28RWkU0Rh6RhQTd8QPTGGCrSpRTia-2VkDLx8u90q6prHNY8caJo-nmWd5vCN0kNUQm3pcY67HJX7Ect21wZRW1HWNSFSTA'
 const SITE_ID = 'e51318d7-c508-40d7-b866-40541c08157f'
-const BASE_URL = 'https://www.wixapis.com'
+const BASE_URL = '/wix-api'
 
 let _tokenCache = null
 
@@ -24,7 +24,7 @@ async function apiPost(path, body = {}, useApiKey = false) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: token,
-      ...(useApiKey ? { 'wix-site-id': SITE_ID } : {}),
+      ...(useApiKey ? { 'x-wix-site-id': SITE_ID } : {}),
     },
     body: JSON.stringify(body),
   })
