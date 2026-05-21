@@ -38,8 +38,12 @@
     /* ── Action cards ── */
     .actions {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .actions-wrap {
       background: #1b3a2d;
     }
 
@@ -47,66 +51,79 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding: 36px 36px 32px;
+      padding: 40px 44px;
       text-decoration: none;
       color: #fff;
-      border-right: 1px solid rgba(255,255,255,0.1);
+      background: #1b3a2d;
       transition: background 0.2s;
-      cursor: pointer;
     }
 
-    .action-card:last-child { border-right: none; }
-    .action-card:hover { background: rgba(255,255,255,0.08); }
+    .action-card:hover { background: #22472f; }
 
     .action-card .icon {
-      font-size: 32px;
-      margin-bottom: 14px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
     }
 
     .action-card .label {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.4px;
       color: #c8a84b;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .action-card h3 {
-      font-size: 19px;
+      font-size: 22px;
       font-weight: 800;
-      margin-bottom: 8px;
-      line-height: 1.2;
+      margin-bottom: 10px;
+      line-height: 1.25;
+      color: #fff;
     }
 
     .action-card p {
       font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
       flex: 1;
+      max-width: 320px;
     }
 
     .action-card .cta {
-      margin-top: 20px;
+      margin-top: 24px;
       background: #c8a84b;
       color: #fff;
-      padding: 10px 22px;
+      padding: 11px 24px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       transition: background 0.2s;
       display: inline-block;
+      flex-shrink: 0;
     }
 
     .action-card:hover .cta { background: #b8943a; }
 
     .action-card.outline .cta {
       background: transparent;
-      border: 2px solid rgba(255,255,255,0.4);
+      border: 2px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.85);
     }
 
-    .action-card.outline:hover .cta { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .action-card.outline:hover .cta {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.07);
+    }
 
     /* ── Info row ── */
     .info-row {
@@ -249,14 +266,14 @@
     @media (max-width: 900px) {
       .intro { padding: 36px 24px; }
       .intro h1 { font-size: 28px; }
-      .actions { grid-template-columns: 1fr 1fr; }
-      .action-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .action-card { padding: 28px 24px; }
+      .action-card h3 { font-size: 18px; }
       .info-row { grid-template-columns: 1fr; }
       .info-cell { border-right: none; border-bottom: 1px solid #eee; padding: 28px 24px; }
       .phone-banner { padding: 24px; flex-direction: column; text-align: center; }
     }
 
-    @media (max-width: 540px) {
+    @media (max-width: 600px) {
       .actions { grid-template-columns: 1fr; }
     }
   </style>
@@ -270,38 +287,40 @@
   </div>
 
   <!-- Action cards -->
-  <div class="actions">
-    <a href="https://form.jotform.com/253626405455155" target="_blank" rel="noopener noreferrer" class="action-card">
-      <div class="icon">&#x1F4E5;</div>
-      <div class="label">Most Popular</div>
-      <h3>Transfer Your Prescriptions</h3>
-      <p>Switching to Burke's is easy. Fill out our quick online form and we'll handle the rest.</p>
-      <span class="cta">Start Transfer &rarr;</span>
-    </a>
+  <div class="actions-wrap">
+    <div class="actions">
+      <a href="https://form.jotform.com/253626405455155" target="_blank" rel="noopener noreferrer" class="action-card">
+        <div class="icon">&#x1F4E5;</div>
+        <div class="label">Most Popular</div>
+        <h3>Transfer Your Prescriptions</h3>
+        <p>Switching to Burke's is easy. Fill out our quick online form and we'll handle the rest.</p>
+        <span class="cta">Start Transfer &rarr;</span>
+      </a>
 
-    <a href="https://patient.rxlocal.com/" target="_blank" rel="noopener noreferrer" class="action-card">
-      <div class="icon">&#x1F48A;</div>
-      <div class="label">Online Portal</div>
-      <h3>Request a Refill</h3>
-      <p>Log in to the patient portal to request refills, view your prescription history, and more.</p>
-      <span class="cta">Go to Portal &rarr;</span>
-    </a>
+      <a href="https://patient.rxlocal.com/" target="_blank" rel="noopener noreferrer" class="action-card">
+        <div class="icon">&#x1F48A;</div>
+        <div class="label">Online Portal</div>
+        <h3>Request a Refill</h3>
+        <p>Log in to the patient portal to request refills, view your prescription history, and more.</p>
+        <span class="cta">Go to Portal &rarr;</span>
+      </a>
 
-    <a href="YOUR_APPOINTMENT_LINK_HERE" target="_blank" rel="noopener noreferrer" class="action-card">
-      <div class="icon">&#x1F4C5;</div>
-      <div class="label">Schedule Online</div>
-      <h3>Book an Appointment</h3>
-      <p>Schedule a vaccine, consultation, or clinical service at a time that works for you.</p>
-      <span class="cta">Book Now &rarr;</span>
-    </a>
+      <a href="YOUR_APPOINTMENT_LINK_HERE" target="_blank" rel="noopener noreferrer" class="action-card">
+        <div class="icon">&#x1F4C5;</div>
+        <div class="label">Schedule Online</div>
+        <h3>Book an Appointment</h3>
+        <p>Schedule a vaccine, consultation, or clinical service at a time that works for you.</p>
+        <span class="cta">Book Now &rarr;</span>
+      </a>
 
-    <a href="https://form.jotform.com/253626405455155" target="_blank" rel="noopener noreferrer" class="action-card outline">
-      <div class="icon">&#x2709;&#xFE0F;</div>
-      <div class="label">General Inquiry</div>
-      <h3>Send Us a Message</h3>
-      <p>Have a question that's not urgent? Drop us a note and we'll get back to you promptly.</p>
-      <span class="cta">Contact Form &rarr;</span>
-    </a>
+      <a href="https://form.jotform.com/253626405455155" target="_blank" rel="noopener noreferrer" class="action-card outline">
+        <div class="icon">&#x2709;&#xFE0F;</div>
+        <div class="label">General Inquiry</div>
+        <h3>Send Us a Message</h3>
+        <p>Have a question that's not urgent? Drop us a note and we'll get back to you promptly.</p>
+        <span class="cta">Contact Form &rarr;</span>
+      </a>
+    </div>
   </div>
 
   <!-- Phone banner -->
