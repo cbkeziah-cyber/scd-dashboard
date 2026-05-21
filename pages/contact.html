@@ -204,12 +204,125 @@
       display: block;
     }
 
+    /* ── All Locations ── */
+    .locations-wrap {
+      background: #f5f5f0;
+      padding: 60px 52px;
+    }
+
+    .locations-header {
+      margin-bottom: 36px;
+    }
+
+    .locations-header h2 {
+      font-size: 28px;
+      font-weight: 900;
+      color: #1b3a2d;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .locations-header p {
+      font-size: 15px;
+      color: #888;
+    }
+
+    .loc-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .loc-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      flex: 1;
+      min-width: 280px;
+      max-width: calc(50% - 12px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .loc-map iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      display: block;
+    }
+
+    .loc-info {
+      padding: 24px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .loc-type {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #c8a84b;
+      margin-bottom: 6px;
+    }
+
+    .loc-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1b3a2d;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .loc-address {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .loc-address:hover { text-decoration: underline; color: #1b3a2d; }
+
+    .loc-hours {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .loc-pills {
+      margin-bottom: 18px;
+    }
+
+    .loc-btn {
+      display: inline-block;
+      margin-top: auto;
+      background: #1b3a2d;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+
+    .loc-btn:hover { background: #2d6a4f; }
+
     @media (max-width: 860px) {
       .cards-wrap { padding: 32px 20px; }
       .cards-row { flex-direction: column; }
       .info-row { flex-direction: column; }
       .info-cell { border-right: none; border-bottom: 1px solid #eee; padding: 28px 20px; }
       .phone-banner { padding: 24px 20px; flex-direction: column; text-align: center; }
+      .locations-wrap { padding: 40px 20px; }
+      .loc-card { max-width: 100%; }
     }
   </style>
 </head>
@@ -304,12 +417,85 @@
 
   </div>
 
-  <!-- Map -->
+  <!-- Map — Riverside Pharmacy -->
   <div class="map-wrap">
-    <iframe
-      src="https://maps.google.com/maps?q=267+Parkside+Commons+%23101+Bluffton+SC+29910&output=embed"
-      allowfullscreen loading="lazy">
-    </iframe>
+    <iframe src="https://maps.google.com/maps?q=267+Parkside+Commons+%23101+Bluffton+SC+29910&output=embed" allowfullscreen loading="lazy"></iframe>
+  </div>
+
+  <!-- All Locations -->
+  <div class="locations-wrap">
+    <div class="locations-header">
+      <h2>All Burke's Locations</h2>
+      <p>Four locations serving the Lowcountry</p>
+    </div>
+
+    <div class="loc-grid">
+
+      <div class="loc-card">
+        <div class="loc-map">
+          <iframe src="https://maps.google.com/maps?q=267+Parkside+Commons+%23101+Bluffton+SC+29910&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="loc-info">
+          <div class="loc-type">Pharmacy</div>
+          <div class="loc-name">Burke's New Riverside Pharmacy</div>
+          <a href="https://maps.google.com/?q=267+Parkside+Commons+%23101+Bluffton+SC+29910" target="_blank" class="loc-address">
+            267 Parkside Cmns #101<br>Bluffton, SC 29910
+          </a>
+          <div class="loc-hours">Mon–Fri 9AM–6PM &nbsp;·&nbsp; Sat 9AM–1PM</div>
+          <div class="loc-pills">
+            <span class="pill">&#x1F697; Drive-Thru</span>
+            <span class="pill">&#x1F6F8; Curbside</span>
+          </div>
+          <a href="https://maps.google.com/?q=267+Parkside+Commons+%23101+Bluffton+SC+29910" target="_blank" class="loc-btn">Get Directions &rarr;</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-map">
+          <iframe src="https://maps.google.com/maps?q=1101+Main+Street+Hilton+Head+SC+29926&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="loc-info">
+          <div class="loc-type">Pharmacy</div>
+          <div class="loc-name">Burke's Main Street Pharmacy</div>
+          <a href="https://maps.google.com/?q=1101+Main+Street+Hilton+Head+SC+29926" target="_blank" class="loc-address">
+            1101 Main Street<br>Hilton Head Island, SC 29926
+          </a>
+          <div class="loc-hours">Mon–Fri 9AM–7PM &nbsp;·&nbsp; Sat 9AM–6PM &nbsp;·&nbsp; Sun 9AM–3PM</div>
+          <a href="https://maps.google.com/?q=1101+Main+Street+Hilton+Head+SC+29926" target="_blank" class="loc-btn">Get Directions &rarr;</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-map">
+          <iframe src="https://maps.google.com/maps?q=321+Hope+Pond+Way+%23104+Bluffton+SC+29910&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="loc-info">
+          <div class="loc-type">Medical Equipment</div>
+          <div class="loc-name">Burke's Medical Equipment — New Riverside</div>
+          <a href="https://maps.google.com/?q=321+Hope+Pond+Way+%23104+Bluffton+SC+29910" target="_blank" class="loc-address">
+            321 Hope Pond Way #104<br>Bluffton, SC 29910
+          </a>
+          <div class="loc-hours">Mon–Fri 9AM–6PM &nbsp;·&nbsp; Sat 9AM–3PM</div>
+          <a href="https://maps.google.com/?q=321+Hope+Pond+Way+%23104+Bluffton+SC+29910" target="_blank" class="loc-btn">Get Directions &rarr;</a>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-map">
+          <iframe src="https://maps.google.com/maps?q=2027+Boundary+St+%235+Beaufort+SC+29902&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="loc-info">
+          <div class="loc-type">Medical Equipment</div>
+          <div class="loc-name">Burke's Medical Equipment — Beaufort</div>
+          <a href="https://maps.google.com/?q=2027+Boundary+St+%235+Beaufort+SC+29902" target="_blank" class="loc-address">
+            2027 Boundary St. #5<br>Beaufort, SC 29902
+          </a>
+          <div class="loc-hours">Mon–Fri 9AM–6PM &nbsp;·&nbsp; Sat 9AM–3PM</div>
+          <a href="https://maps.google.com/?q=2027+Boundary+St+%235+Beaufort+SC+29902" target="_blank" class="loc-btn">Get Directions &rarr;</a>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 </body>
