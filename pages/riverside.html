@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burke's New Riverside Pharmacy</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+    }
+
+    .btn-refill {
+      background: #c8a84b;
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-refill:hover { background: #b8943a; }
+
+    .btn-billpay {
+      background: #1b3a2d;
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-billpay:hover { background: #2d6a4f; }
+
+
+    /* Hero */
+    .hero {
+      background:
+        linear-gradient(to bottom, rgba(10,30,20,0.45) 0%, rgba(10,30,20,0.55) 100%),
+        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&q=80') center/cover no-repeat;
+      color: #fff;
+      padding: 110px 40px 120px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h2 {
+      font-size: 56px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      max-width: 480px;
+      margin: 0 0 36px;
+      line-height: 1.7;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #c8a84b;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover { background: #b8943a; transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* Hours bar */
+    .hours-bar {
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+      margin: -36px 60px 0;
+      border-radius: 12px;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+      z-index: 10;
+      border-top: 4px solid #c8a84b;
+    }
+
+    .hours-item { text-align: center; }
+
+    .hours-item .day {
+      font-size: 12px;
+      color: #888;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .hours-item .time {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1b3a2d;
+    }
+
+    .hours-divider {
+      width: 1px;
+      height: 48px;
+      background: #ddd;
+    }
+
+    /* Services */
+    .section {
+      padding: 80px 60px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-header h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #1b3a2d;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-header .underline {
+      width: 60px;
+      height: 4px;
+      background: #c8a84b;
+      margin: 0 auto 14px;
+      border-radius: 2px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: #666;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 34px 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 4px solid #2d6a4f;
+    }
+
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: #eaf4ef;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 18px;
+    }
+
+    .service-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1b3a2d;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.65;
+    }
+
+    /* Info section */
+    .info-section {
+      background: #eaf4ef;
+      padding: 64px 60px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .info-block {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .info-block h4 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1b3a2d;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-block p {
+      font-size: 15px;
+      color: #444;
+      line-height: 2;
+    }
+
+    .info-block ul { list-style: none; padding: 0; }
+
+    .info-block li {
+      font-size: 15px;
+      color: #444;
+      line-height: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-block li::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: #2d6a4f;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* Footer */
+    footer {
+      background: #1b3a2d;
+      color: rgba(200,230,210,0.7);
+      text-align: center;
+      padding: 36px 20px;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    footer strong { color: #fff; font-size: 16px; }
+
+    footer .gold { color: #c8a84b; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 14px; text-align: center; }
+      .header-right { flex-direction: column; }
+      .header-contact .tagline { text-align: center; }
+      .hero h2 { font-size: 28px; }
+      .hours-bar { margin: -20px 16px 0; padding: 20px 24px; }
+      .hours-divider { display: none; }
+      .section { padding: 52px 24px; }
+      .info-section { padding: 44px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h2>Your Care Is<br>Our Calling</h2>
+      <p>Fast prescriptions, friendly faces, and a pharmacy that actually knows your name. Now open in Riverside.</p>
+      <div class="hero-buttons">
+        <a href="https://form.jotform.com/253626405455155" target="_blank" rel="noopener noreferrer" class="btn-primary">Transfer Your Prescriptions</a>
+        <a href="#location" class="btn-secondary">Find Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hours Bar -->
+  <div class="hours-bar" id="hours">
+    <div class="hours-item">
+      <div class="day">Monday &ndash; Friday</div>
+      <div class="time">9:00 AM &ndash; 6:00 PM</div>
+    </div>
+    <div class="hours-divider"></div>
+    <div class="hours-item">
+      <div class="day">Saturday</div>
+      <div class="time">9:00 AM &ndash; 1:00 PM</div>
+    </div>
+    <div class="hours-divider"></div>
+    <div class="hours-item">
+      <div class="day">Sunday</div>
+      <div class="time">Closed</div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="section" id="services">
+    <div class="section-header">
+      <h3>Our Services</h3>
+      <div class="underline"></div>
+      <p>Everything you need from a pharmacy, delivered with a personal touch.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">&#x1F48A;</div>
+        <h4>Prescription Filling</h4>
+        <p>Fast, accurate prescription dispensing with same-day service for most medications.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#x1F489;</div>
+        <h4>Immunizations</h4>
+        <p>Flu shots, COVID-19, travel vaccines and more &mdash; no appointment needed.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#x1F504;</div>
+        <h4>Medication Sync</h4>
+        <p>Synchronize all your prescriptions to one monthly pickup date for convenience.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#x1FA7A;</div>
+        <h4>Health Consultations</h4>
+        <p>Speak with our pharmacist about your medications, side effects, and interactions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#x1F4E6;</div>
+        <h4>Compounding</h4>
+        <p>Custom-formulated medications tailored to your specific needs and dosing requirements.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#x1F69B;</div>
+        <h4>Equipment Rental</h4>
+        <p>Wheelchairs, walkers, crutches and more available for short or long-term rental.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info -->
+  <div class="info-section" id="location">
+    <div class="info-block">
+      <h4>&#x1F4CD; Location</h4>
+      <p>
+        Burke's New Riverside Pharmacy<br>
+        Riverside Area<br><br>
+        <strong>&#x1F697; Drive-Thru Available</strong><br>
+        <strong>&#x1F6F8; Curbside Pickup Available</strong><br><br>
+        Convenient parking available.<br>
+        Wheelchair accessible entrance.
+      </p>
+      <a href="https://maps.google.com/?q=Burke's+New+Riverside+Pharmacy" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#2d6a4f;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;transition:background 0.2s;" onmouseover="this.style.background='#1b3a2d'" onmouseout="this.style.background='#2d6a4f'">
+        &#x1F5FA; Open in Google Maps
+      </a>
+    </div>
+    <div class="info-block">
+      <h4>&#x23F0; Store Hours</h4>
+      <ul>
+        <li>Monday &ndash; Friday: 9:00 AM &ndash; 6:00 PM</li>
+        <li>Saturday: 9:00 AM &ndash; 1:00 PM</li>
+        <li>Sunday: Closed</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>&#x2714; Why Choose Us</h4>
+      <ul>
+        <li>Local, community-owned pharmacy</li>
+        <li>Personalized pharmacist consultations</li>
+        <li>Most insurance plans accepted</li>
+        <li>Fast prescription turnaround</li>
+        <li>Friendly, knowledgeable staff</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <p><strong>Burke's New Riverside Pharmacy</strong></p>
+    <p class="gold">Open Monday&ndash;Friday 9:00 AM&ndash;6:00 PM &nbsp;|&nbsp; Saturday 9:00 AM&ndash;1:00 PM</p>
+    <p style="margin-top:14px; font-size:12px; opacity:0.5;">&copy; 2025 Burke's New Riverside Pharmacy. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
