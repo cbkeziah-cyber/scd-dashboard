@@ -57,9 +57,24 @@
     }
 
     .hero-inner {
-      max-width: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1100px;
       position: relative;
       z-index: 2;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 8px;
     }
 
     .hero h2 {
@@ -82,40 +97,33 @@
       text-shadow: 0 1px 6px rgba(0,0,0,0.4);
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
+    .btn-primary, .btn-secondary {
+      display: block;
+      width: 220px;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      text-align: center;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
 
     .btn-primary {
       background: #c8a84b;
       color: #fff;
-      padding: 14px 36px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
 
     .btn-primary:hover { background: #b8943a; transform: translateY(-2px); }
 
     .btn-secondary {
-      background: transparent;
-      color: #fff;
-      padding: 14px 36px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      border: 2px solid rgba(255,255,255,0.5);
-      transition: border-color 0.2s, background 0.2s;
+      background: #fff;
+      color: #1b3a2d;
     }
 
-    .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .btn-secondary:hover { background: #f0f0f0; transform: translateY(-2px); }
 
     /* Hours bar */
     .hours-bar {
@@ -328,9 +336,11 @@
   <!-- Hero -->
   <div class="hero">
     <div class="hero-inner">
-      <h2>Your Care Is<br>Our Calling</h2>
-      <p>Fast prescriptions, friendly faces, and a pharmacy that actually knows your name. Now open in Riverside.</p>
-      <div class="hero-buttons">
+      <div class="hero-text">
+        <h2>Your Care Is<br>Our Calling</h2>
+        <p>Fast prescriptions, friendly faces, and a pharmacy that actually knows your name. Now open in Riverside.</p>
+      </div>
+      <div class="hero-actions">
         <a href="https://form.jotform.com/253626405455155" target="_blank" rel="noopener noreferrer" class="btn-primary">Transfer Your Prescriptions</a>
         <a href="#location" class="btn-secondary">Find Us</a>
       </div>
@@ -401,14 +411,15 @@
     <div class="info-block">
       <h4>&#x1F4CD; Location</h4>
       <p>
-        Burke's New Riverside Pharmacy<br>
-        Riverside Area<br><br>
+        <a href="https://maps.google.com/?q=267+Parkside+Commons+%23101+Bluffton+SC+29910" target="_blank" rel="noopener noreferrer" style="color:#1b3a2d;font-weight:700;text-decoration:none;font-size:16px;">
+          267 Parkside Cmns #101<br>Bluffton, SC 29910
+        </a><br><br>
         <strong>&#x1F697; Drive-Thru Available</strong><br>
         <strong>&#x1F6F8; Curbside Pickup Available</strong><br><br>
         Convenient parking available.<br>
         Wheelchair accessible entrance.
       </p>
-      <a href="https://maps.google.com/?q=Burke's+New+Riverside+Pharmacy" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#2d6a4f;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;transition:background 0.2s;" onmouseover="this.style.background='#1b3a2d'" onmouseout="this.style.background='#2d6a4f'">
+      <a href="https://maps.google.com/?q=267+Parkside+Commons+%23101+Bluffton+SC+29910" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#2d6a4f;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;transition:background 0.2s;" onmouseover="this.style.background='#1b3a2d'" onmouseout="this.style.background='#2d6a4f'">
         &#x1F5FA; Open in Google Maps
       </a>
     </div>
