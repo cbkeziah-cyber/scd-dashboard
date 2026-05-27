@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Burke's Pharmacy Digital Platform</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Georgia, serif;
+      background: #fafaf8;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* ── Cover ── */
+    .cover {
+      background: linear-gradient(135deg, #1b3a2d 0%, #2d6a4f 60%, #3d8a65 100%);
+      color: #fff;
+      padding: 80px 80px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      right: -100px; top: -100px;
+      width: 500px; height: 500px;
+      background: rgba(200,168,75,0.08);
+      border-radius: 50%;
+    }
+
+    .cover-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c8a84b;
+      margin-bottom: 20px;
+    }
+
+    .cover h1 {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .cover-sub {
+      font-size: 20px;
+      color: rgba(255,255,255,0.75);
+      max-width: 580px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+    }
+
+    .meta-item .value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ── Section layout ── */
+    .section {
+      padding: 72px 80px;
+    }
+
+    .section-alt { background: #fff; }
+    .section-dark { background: #1b3a2d; color: #fff; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c8a84b;
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      font-size: 34px;
+      font-weight: 900;
+      color: #1b3a2d;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-dark h2 { color: #fff; }
+
+    .section-intro {
+      font-size: 17px;
+      color: #555;
+      max-width: 720px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+
+    .section-dark .section-intro { color: rgba(255,255,255,0.7); }
+
+    /* ── Executive summary ── */
+    .exec-summary {
+      background: #fff;
+      border-left: 5px solid #c8a84b;
+      padding: 32px 40px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 48px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    .exec-summary p {
+      font-size: 17px;
+      line-height: 1.9;
+      color: #333;
+    }
+
+    /* ── Stat row ── */
+    .stats {
+      display: flex;
+      gap: 0;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      margin-bottom: 48px;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 32px 28px;
+      border-right: 1px solid #f0f0f0;
+      text-align: center;
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat .num {
+      font-size: 38px;
+      font-weight: 900;
+      color: #1b3a2d;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat .desc {
+      font-size: 13px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+    }
+
+    /* ── Feature grid ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 0;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border-top: 4px solid #2d6a4f;
+    }
+
+    .feature-card .icon { font-size: 32px; margin-bottom: 16px; }
+    .feature-card h3 { font-size: 16px; font-weight: 800; color: #1b3a2d; margin-bottom: 10px; }
+    .feature-card p { font-size: 14px; color: #666; line-height: 1.7; }
+
+    /* ── Screenshot mockup ── */
+    .screens {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 0;
+    }
+
+    .screen-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    .screen-bar {
+      background: #2d2d2d;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green { background: #28c840; }
+
+    .screen-url {
+      background: #3d3d3d;
+      border-radius: 4px;
+      padding: 3px 12px;
+      font-size: 11px;
+      color: #aaa;
+      flex: 1;
+      font-family: monospace;
+    }
+
+    .screen-body {
+      background: #f5f5f0;
+    }
+
+    /* SEO Dashboard mockup */
+    .mock-dashboard {
+      background: #f5f5f0;
+      padding: 20px;
+    }
+
+    .mock-nav {
+      background: #1b3a2d;
+      border-radius: 8px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .mock-nav-title { color: #fff; font-weight: 800; font-size: 13px; }
+    .mock-nav-dot { width: 6px; height: 6px; background: #c8a84b; border-radius: 50%; margin-left: auto; }
+
+    .mock-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .mock-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .mock-card-label { font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .mock-card-val { font-size: 20px; font-weight: 900; color: #1b3a2d; }
+    .mock-card-change { font-size: 9px; color: #27ae60; margin-top: 2px; }
+
+    .mock-chart {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .mock-bar {
+      flex: 1;
+      background: #2d6a4f;
+      border-radius: 3px 3px 0 0;
+      opacity: 0.7;
+    }
+
+    /* Pharmacy page mockup */
+    .mock-pharma {
+      background: #f5f5f0;
+    }
+
+    .mock-hero {
+      background: linear-gradient(to right, rgba(10,30,20,0.7), rgba(10,30,20,0.4)),
+        linear-gradient(135deg, #2d6a4f, #3d8a65);
+      padding: 28px 24px;
+      color: #fff;
+    }
+
+    .mock-hero h4 { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .mock-hero p { font-size: 11px; opacity: 0.75; margin-bottom: 14px; }
+
+    .mock-btns { display: flex; gap: 8px; }
+    .mock-btn { background: #c8a84b; color: #fff; padding: 6px 14px; border-radius: 5px; font-size: 10px; font-weight: 700; }
+    .mock-btn.white { background: #fff; color: #1b3a2d; }
+
+    .mock-hours {
+      background: #fff;
+      margin: -12px 16px 0;
+      border-radius: 8px;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-top: 3px solid #c8a84b;
+    }
+
+    .mock-hours-item { text-align: center; }
+    .mock-hours-day { color: #aaa; text-transform: uppercase; font-size: 8px; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .mock-hours-time { font-weight: 800; color: #1b3a2d; font-size: 11px; }
+
+    /* Contact mockup */
+    .mock-contact { background: #1b3a2d; padding: 20px; }
+
+    .mock-contact-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mock-contact-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mock-contact-card .ci { font-size: 18px; margin-bottom: 6px; }
+    .mock-contact-card .ct { font-size: 9px; color: #c8a84b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .mock-contact-card .cn { font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .mock-contact-card .cb { background: #c8a84b; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 9px; font-weight: 700; display: inline-block; margin-top: 6px; }
+
+    /* ── Tech stack ── */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .tech-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 20px 18px;
+      text-align: center;
+    }
+
+    .tech-pill .ti { font-size: 28px; margin-bottom: 8px; }
+    .tech-pill .tn { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .tech-pill .td { font-size: 11px; color: rgba(255,255,255,0.5); }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 8px; bottom: 0;
+      width: 2px;
+      background: #e0e0e0;
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -28px;
+      top: 4px;
+      width: 14px; height: 14px;
+      background: #2d6a4f;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px #2d6a4f;
+    }
+
+    .tl-item h4 { font-size: 16px; font-weight: 800; color: #1b3a2d; margin-bottom: 4px; }
+    .tl-item p { font-size: 14px; color: #666; line-height: 1.6; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      background: #1b2a1f;
+      color: rgba(255,255,255,0.4);
+      padding: 28px 80px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .doc-footer strong { color: rgba(255,255,255,0.7); }
+
+    @media print {
+      .section { padding: 48px 60px; }
+      .cover { padding: 60px; }
+    }
+
+    @media (max-width: 900px) {
+      .cover { padding: 48px 32px; }
+      .cover h1 { font-size: 34px; }
+      .section { padding: 48px 32px; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .screens { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .mock-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-tag">Portfolio Case Study</div>
+    <h1>Burke's Pharmacy<br>Digital Platform</h1>
+    <p class="cover-sub">A full-stack SEO analytics dashboard and multi-location web presence built for a regional pharmacy group serving the South Carolina Lowcountry.</p>
+    <div class="cover-meta">
+      <div class="meta-item">
+        <div class="label">Client</div>
+        <div class="value">Burke's Pharmacy Group</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Location</div>
+        <div class="value">Bluffton / Hilton Head / Beaufort, SC</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Platform</div>
+        <div class="value">React · Node.js · Railway</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Year</div>
+        <div class="value">2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <div class="section section-alt">
+    <div class="section-label">Executive Summary</div>
+    <h2>What Was Built & Why</h2>
+
+    <div class="exec-summary">
+      <p>Burke's Pharmacy Group operates four locations across the South Carolina Lowcountry — two pharmacies and two durable medical equipment centers. Despite strong community presence, the group lacked a centralized view of their digital performance and had no streamlined way for patients to transfer prescriptions, book appointments, or engage online.</p>
+      <br>
+      <p>This project delivered two interconnected solutions: a <strong>live SEO & analytics dashboard</strong> giving management real-time visibility into search rankings, web traffic, and Wix e-commerce performance — and a <strong>custom web page system</strong> for their Wix site that modernizes the patient experience across all locations, optimized for both desktop and mobile.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="desc">Locations Covered</div>
+      </div>
+      <div class="stat">
+        <div class="num">3</div>
+        <div class="desc">Data Sources Integrated</div>
+      </div>
+      <div class="stat">
+        <div class="num">24/7</div>
+        <div class="desc">Live Cloud Deployment</div>
+      </div>
+      <div class="stat">
+        <div class="num">100%</div>
+        <div class="desc">Mobile Responsive</div>
+      </div>
+      <div class="stat">
+        <div class="num">0</div>
+        <div class="desc">Backend Forms (All Link-Out)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part 1: SEO Dashboard -->
+  <div class="section">
+    <div class="section-label">Part One</div>
+    <h2>SEO & Analytics Dashboard</h2>
+    <p class="section-intro">A private, password-free dashboard deployed on Railway that pulls live data from Google Search Console, Google Analytics 4, and the Wix Stores API — giving the pharmacy team a single pane of glass for their digital performance.</p>
+
+    <div class="screens" style="margin-bottom:48px;">
+      <div class="screen-card">
+        <div class="screen-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="screen-url">scd-dashboard.up.railway.app</div>
+        </div>
+        <div class="mock-dashboard">
+          <div class="mock-nav">
+            <div class="mock-nav-title">&#x1F50D;&nbsp; SCD Dashboard — Overview</div>
+            <div class="mock-nav-dot"></div>
+          </div>
+          <div class="mock-cards">
+            <div class="mock-card">
+              <div class="mock-card-label">GSC Clicks</div>
+              <div class="mock-card-val">1,284</div>
+              <div class="mock-card-change">&#x25B2; +12%</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-label">Avg Position</div>
+              <div class="mock-card-val">14.2</div>
+              <div class="mock-card-change" style="color:#e67e22;">&#x25BC; -0.8</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-label">Sessions</div>
+              <div class="mock-card-val">3,441</div>
+              <div class="mock-card-change">&#x25B2; +7%</div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-label">Bounce Rate</div>
+              <div class="mock-card-val">38%</div>
+              <div class="mock-card-change">&#x25B2; Improving</div>
+            </div>
+          </div>
+          <div class="mock-chart">
+            <div class="mock-bar" style="height:30%"></div>
+            <div class="mock-bar" style="height:45%"></div>
+            <div class="mock-bar" style="height:35%"></div>
+            <div class="mock-bar" style="height:60%"></div>
+            <div class="mock-bar" style="height:50%"></div>
+            <div class="mock-bar" style="height:70%"></div>
+            <div class="mock-bar" style="height:55%"></div>
+            <div class="mock-bar" style="height:80%"></div>
+            <div class="mock-bar" style="height:65%"></div>
+            <div class="mock-bar" style="height:90%"></div>
+            <div class="mock-bar" style="height:75%"></div>
+            <div class="mock-bar" style="height:100%; opacity:1; background:#c8a84b;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="screen-url">scd-dashboard.up.railway.app/on-page-seo</div>
+        </div>
+        <div class="mock-dashboard" style="padding:16px;">
+          <div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 6px rgba(0,0,0,0.07);">
+            <div style="font-size:11px;font-weight:800;color:#1b3a2d;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">On-Page SEO — Product List</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#f9f9f9;border-radius:6px;border-left:3px solid #27ae60;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:#1b3a2d;">Compression Stockings</div>
+                  <div style="font-size:10px;color:#888;">Meta title: 58 chars · Score: 92/100</div>
+                </div>
+                <div style="background:#1b3a2d;color:#fff;padding:4px 10px;border-radius:4px;font-size:9px;font-weight:700;">Edit</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#f9f9f9;border-radius:6px;border-left:3px solid #e67e22;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:#1b3a2d;">Wheelchair Rentals</div>
+                  <div style="font-size:10px;color:#888;">Missing meta description · Score: 61/100</div>
+                </div>
+                <div style="background:#c8a84b;color:#fff;padding:4px 10px;border-radius:4px;font-size:9px;font-weight:700;">Fix</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#f9f9f9;border-radius:6px;border-left:3px solid #27ae60;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:#1b3a2d;">Crutches & Walkers</div>
+                  <div style="font-size:10px;color:#888;">Meta title: 42 chars · Score: 88/100</div>
+                </div>
+                <div style="background:#1b3a2d;color:#fff;padding:4px 10px;border-radius:4px;font-size:9px;font-weight:700;">Edit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">&#x1F4CA;</div>
+        <h3>Overview Dashboard</h3>
+        <p>Real-time stats from Google Search Console (clicks, impressions, CTR, avg. position) and GA4 (sessions, pageviews, bounce rate) displayed side by side with traffic trend charts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F50D;</div>
+        <h3>On-Page SEO Editor</h3>
+        <p>Pulls live product data from the Wix Stores API. Each product shows its SEO score and flags issues. Managers can edit meta titles, descriptions, and product copy directly and save back to Wix via PATCH API.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F6D2;</div>
+        <h3>Ecommerce Tracking</h3>
+        <p>Integrates with the Wix Stores v1 API to pull revenue, order counts, and product performance — giving the team a unified view alongside their organic traffic data.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F4C5;</div>
+        <h3>Date Range Controls</h3>
+        <p>Header-level date picker lets users switch between 7, 14, 28, and 90-day windows. All widgets re-query the APIs and refresh simultaneously.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F511;</div>
+        <h3>Google OAuth 2.0</h3>
+        <p>One-click sign-in via Google Identity Services. Access token stored in localStorage. Connects to both Search Console and Analytics APIs with a single auth flow.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F6E0;&#xFE0F;</div>
+        <h3>Server-Side Wix Proxy</h3>
+        <p>An Express.js proxy layer on the server bypasses Wix's browser CORS restrictions, remapping client headers server-side so all Wix API calls succeed without exposing keys.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part 2: Web Pages -->
+  <div class="section section-alt">
+    <div class="section-label">Part Two</div>
+    <h2>Patient-Facing Web Pages</h2>
+    <p class="section-intro">Custom HTML/CSS pages designed to embed directly into the existing Wix site via the HTML embed widget. Built to match Burke's brand — dark forest green, gold accents — and engineered to coexist with Wix's own CSS without conflicts.</p>
+
+    <div class="screens" style="margin-bottom:48px;">
+      <div class="screen-card">
+        <div class="screen-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="screen-url">burkespharmacy.com/new-riverside</div>
+        </div>
+        <div class="mock-pharma">
+          <div class="mock-hero">
+            <h4>Your Care Is<br>Our Calling</h4>
+            <p>Fast prescriptions, friendly faces, and a pharmacy that knows your name.</p>
+            <div class="mock-btns">
+              <div class="mock-btn">Transfer Your Prescriptions</div>
+              <div class="mock-btn white">Find Us</div>
+            </div>
+          </div>
+          <div class="mock-hours">
+            <div class="mock-hours-item">
+              <div class="mock-hours-day">Mon – Fri</div>
+              <div class="mock-hours-time">9AM – 6PM</div>
+            </div>
+            <div style="width:1px;background:#eee;"></div>
+            <div class="mock-hours-item">
+              <div class="mock-hours-day">Saturday</div>
+              <div class="mock-hours-time">9AM – 1PM</div>
+            </div>
+            <div style="width:1px;background:#eee;"></div>
+            <div class="mock-hours-item">
+              <div class="mock-hours-day">Sunday</div>
+              <div class="mock-hours-time" style="color:#bbb;">Closed</div>
+            </div>
+          </div>
+          <div style="padding:16px;">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+              <div style="background:#fff;border-radius:8px;padding:12px;text-align:center;border-top:3px solid #2d6a4f;font-size:10px;font-weight:700;color:#1b3a2d;">&#x1F48A;<br>Prescriptions</div>
+              <div style="background:#fff;border-radius:8px;padding:12px;text-align:center;border-top:3px solid #2d6a4f;font-size:10px;font-weight:700;color:#1b3a2d;">&#x1F489;<br>Immunizations</div>
+              <div style="background:#fff;border-radius:8px;padding:12px;text-align:center;border-top:3px solid #2d6a4f;font-size:10px;font-weight:700;color:#1b3a2d;">&#x1F504;<br>Med Sync</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="screen-url">burkespharmacy.com/contact</div>
+        </div>
+        <div class="mock-contact">
+          <div class="mock-contact-cards">
+            <div class="mock-contact-card">
+              <div class="ci">&#x1F4E5;</div>
+              <div class="ct">Most Popular</div>
+              <div class="cn">Transfer Your Prescriptions</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);">Fill out our quick form...</div>
+              <div class="cb">Start Transfer →</div>
+            </div>
+            <div class="mock-contact-card">
+              <div class="ci">&#x1F48A;</div>
+              <div class="ct">Online Portal</div>
+              <div class="cn">Request a Refill</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);">Log in to the patient portal...</div>
+              <div class="cb">Go to Portal →</div>
+            </div>
+            <div class="mock-contact-card">
+              <div class="ci">&#x1F4C5;</div>
+              <div class="ct">Schedule Online</div>
+              <div class="cn">Book Appointment</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);">Vaccines, consultations...</div>
+              <div class="cb">Book Now →</div>
+            </div>
+            <div class="mock-contact-card">
+              <div class="ci">&#x2709;&#xFE0F;</div>
+              <div class="ct">General Inquiry</div>
+              <div class="cn">Send Us a Message</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.5);">Non-urgent questions...</div>
+              <div class="cb">Contact Form →</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;background:#c8a84b;border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="color:#fff;font-size:11px;font-weight:700;">Need help right away?</div>
+            <div style="background:#fff;color:#1b3a2d;padding:6px 14px;border-radius:5px;font-weight:900;font-size:12px;">&#x1F4DE; 843-681-2622</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">&#x1F3E5;</div>
+        <h3>Location Landing Pages</h3>
+        <p>Individual pages for each pharmacy location featuring photo hero banners, hours, services, drive-thru/curbside info, clickable address for mobile GPS, and Google Maps embeds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F4CD;</div>
+        <h3>4-Location Contact Hub</h3>
+        <p>A single contact page covering all four Burke's locations — each with embedded Google Map, accurate hours, address, and a Get Directions button. All forms link out to external services.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#x1F4F1;</div>
+        <h3>Mobile-First Design</h3>
+        <p>Every page is fully responsive with tap-to-call phone links, tap-to-navigate address links, and stacked layouts for small screens. Tested against Wix's iframe embed constraints.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="section section-dark">
+    <div class="section-label">Technical Architecture</div>
+    <h2>How It Works</h2>
+    <p class="section-intro">The platform is split into two layers: a React SPA served by an Express.js server (acting as both static host and API proxy), and standalone HTML/CSS pages embedded into the existing Wix CMS.</p>
+
+    <div class="tech-grid" style="margin-bottom:48px;">
+      <div class="tech-pill">
+        <div class="ti">⚛️</div>
+        <div class="tn">React 18</div>
+        <div class="td">Dashboard UI with hooks-based data fetching</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">🚂</div>
+        <div class="tn">Railway</div>
+        <div class="td">Cloud deployment, always-on, auto-deploys from GitHub</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">🟢</div>
+        <div class="tn">Node / Express</div>
+        <div class="td">Static server + Wix API proxy to bypass CORS</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">⚡</div>
+        <div class="tn">Vite</div>
+        <div class="td">Production build bundler for the React app</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">🔍</div>
+        <div class="tn">Google Search Console API</div>
+        <div class="td">Keyword rankings, clicks, impressions, CTR</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">📊</div>
+        <div class="tn">Google Analytics 4 API</div>
+        <div class="td">Sessions, pageviews, bounce rate, channels</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">🛒</div>
+        <div class="tn">Wix Stores API v1</div>
+        <div class="td">Product SEO data, PATCH edits, revenue stats</div>
+      </div>
+      <div class="tech-pill">
+        <div class="ti">🐙</div>
+        <div class="tn">GitHub</div>
+        <div class="td">Source control, triggers Railway auto-deploy on push</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h4>User visits dashboard URL</h4>
+        <p>Railway serves the production-built React app from the Express static server. No Vite dev server — single bundled JS file eliminates cache collision issues.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h4>Google OAuth sign-in</h4>
+        <p>Google Identity Services issues an access token via implicit flow. Token stored in localStorage and automatically attached to all GSC and GA4 API calls.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h4>Wix API calls routed through proxy</h4>
+        <p>Browser sends requests to <code style="background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:3px;">/wix-api/*</code> on the same origin. Express intercepts, remaps headers (x-wix-site-id → wix-site-id), and forwards to Wix's servers — bypassing browser CORS restrictions.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h4>On-Page SEO edits saved live</h4>
+        <p>Manager edits a product's meta title or description in the dashboard modal. Dashboard sends a PATCH request via the proxy to the Wix Stores v1 API, updating the product in real time. The product list refreshes automatically.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h4>Web pages embedded in Wix</h4>
+        <p>HTML pages are pasted into Wix's Custom HTML embed widget. All CSS is scoped with unique class names to prevent Wix stylesheet conflicts. No inline forms — all CTAs link out to RxLocal, JotForm, or Railway-hosted tools.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div><strong>Burke's Pharmacy Digital Platform</strong> — Portfolio Case Study</div>
+    <div>Built with React · Node.js · Express · Vite · Railway &nbsp;·&nbsp; 2026</div>
+  </div>
+
+</body>
+</html>
